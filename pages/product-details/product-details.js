@@ -7,24 +7,38 @@ const increaseItems = document.getElementById('increaseItems');
 const decreaseItems = document.getElementById('decreaseItems');
 const addToCartBtn = document.getElementById('addToCart');
 const carouselProductImages = Array.from(document.getElementsByClassName('carousel-product-image'));
-
+const loader = document.getElementById('productDetailLoader');
 let currentProduct = null;
 
 console.log('[DEBUG] productId ===> ', productId);
+getProductDetails();
 
-fetch(`https://fakestoreapi.com/products/${productId}`)
-.then(res => res.json())
-.then(product => {
-    currentProduct = product;
-    currentProduct['quantity'] = 1;
-    console.log('[DEBUG] product ===> ', product);
 
-    carouselProductImages.forEach(imageTag => {
-        imageTag.src = product.image;
-    });
+function toggleLoader(state) {
+    if(state) {
+        loader.style.display = "block";
+    } else {
+        loader.style.display = "none";
+    }
+}
 
-    if(!productDetail) return;
-    productDetail.innerHTML = `
+
+function getProductDetails() {
+    toggleLoader(true);
+    fetch(`https://fakestoreapi.com/products/${productId}`)
+    .then(res => res.json())
+    .then(product => {
+        toggleLoader(false);
+        currentProduct = product;
+        currentProduct['quantity'] = 1;
+        console.log('[DEBUG] product ===> ', product);
+        
+        carouselProductImages.forEach(imageTag => {
+            imageTag.src = product.image;
+        });
+        
+        if(!productDetail) return;
+        productDetail.innerHTML = `
             <ul class="breadcrumb">
                 <li>Clothing</li>
                 <li>Women's</li>
@@ -38,13 +52,14 @@ fetch(`https://fakestoreapi.com/products/${productId}`)
             </ul>
             <span>${product.description} <a href="">Read more</a></span>
         `;
-
+        
         moreProductDetail.innerHTML = `
         <h2>${product.title}</h2>
         <h4>Description</h4>
         <p>${product.description}</p>
         `;
-});
+    });
+}
 
 increaseItems.addEventListener('click', ($event) => {
     quantity.value = parseInt(quantity.value, 10) + 1;
@@ -69,9 +84,9 @@ function renderStars(rating) {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5; 
     const emptyStars = 5 - Math.ceil(rating);
-
+    
     let starsHTML = '';
-
+    
     for (let i = 0; i < fullStars; i++) {
         starsHTML += '<i class="fa fa-star"></i>';
     }
@@ -81,7 +96,7 @@ function renderStars(rating) {
     for (let i = 0; i < emptyStars; i++) {
         starsHTML += '<i class="fa fa-star-o"></i>';
     }
-
+    
     return starsHTML;
 }
 const addButton = document.getElementById('isMobileMenu');

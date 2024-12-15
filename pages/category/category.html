@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1363DF" />
     <title>Venia | Home</title>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
@@ -240,14 +241,44 @@
                 <div class="col-lg-9">
                     <div class="listOfProductItems">
                         <div class="prodcutSearchSection">
-                            <p>20 Results</p>
+                            <p><span id="productCount">0</span> Results</p>
                             <select name="" id="sort-dropdown">
                                 <option value="">Select</option>
                                 <option value="price">Sort by Price</option>
                                 <option value="category">Sort by Categories</option>
                             </select>
                         </div>
-                        <div class="row" id="prodcutListshimmerLoader" style="display: none;"></div>
+                        <div class="row" id="prodcutListshimmerLoader">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="product-card">
+                                        <div class="itemImage shimmerBG"></div>
+                                        <div class="itemsDetails">
+                                            <h5 class="shimmerBG"></h5>
+                                            <p class="shimmerBG"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="product-card">
+                                        <div class="itemImage shimmerBG"></div>
+                                        <div class="itemsDetails">
+                                            <h5 class="shimmerBG"></h5>
+                                            <p class="shimmerBG"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="product-card">
+                                        <div class="itemImage shimmerBG"></div>
+                                        <div class="itemsDetails">
+                                            <h5 class="shimmerBG"></h5>
+                                            <p class="shimmerBG"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="product-list" class="row"></div>
                     </div>
                 </div>
