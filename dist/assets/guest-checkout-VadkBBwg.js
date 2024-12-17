@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";const e=document.getElementById("isMobileMenu");e.addEventListener("click",()=>{document.body.classList.toggle("isMobileMenuOpend")});const t=document.getElementById("removeButtons");t.addEventListener("click",()=>{document.body.classList.toggle("isMobileMenuOpend")});
