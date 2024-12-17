@@ -10,7 +10,11 @@ renderCartItems();
 function renderCartItems() {
     let currentCart = getCart();
     let cartItemsList = Object.keys(currentCart);
-    cartItems.innerHTML = ""; // Clear existing items
+    cartItems.innerHTML = "";
+
+    if(!cartItemsList.length) {
+        cartItems.innerHTML = '<div class="emptyState"><h3>You have removed the selected items. Please navigate to the category page to choose a new product.</h3><a href="/">Go to Home</a></div>'
+    }
 
     cartItemsList.forEach((key) => {
         const item = currentCart[key];

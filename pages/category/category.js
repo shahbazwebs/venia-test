@@ -7,6 +7,8 @@ const productCount = document.getElementById('productCount');
 
 let products = [];
 let uniqueCategories = [];
+let currentPage = 1;
+const itemsPerPage = 5;
 
 getProducts();
 
@@ -63,8 +65,12 @@ function getProducts() {
 }
 
 function renderProducts(filteredProducts) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const productsToDisplay = filteredProducts.slice(startIndex, endIndex);
+
     productList.innerHTML = '';
-    filteredProducts.forEach(product => {
+    productsToDisplay.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('col-md-4');
         productCard.classList.add('col-sm-6');
@@ -81,6 +87,8 @@ function renderProducts(filteredProducts) {
                 `;
         productList.appendChild(productCard);
     });
+
+    renderPagination(filteredProducts);
 }
 
 function updateProductList() {
@@ -138,6 +146,27 @@ function handleSortChange(event) {
 }
 
 document.getElementById("sort-dropdown").addEventListener("change", handleSortChange);
+
+function renderPagination(filteredProducts) {
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const paginationContainer = document.getElementById('pagination-container');
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageItem = document.createElement('li');
+        pageItem.textContent = i;
+        pageItem.className = 'page-item';
+        if (i === currentPage) {
+            pageItem.classList.add('active');
+        }
+        pageItem.addEventListener('click', () => {
+            currentPage = i;
+            renderProducts(filteredProducts);
+        });
+
+        paginationContainer.appendChild(pageItem);
+    }
+}
 
 const addButton = document.getElementById('isMobileMenu');
 addButton.addEventListener('click', () => {
