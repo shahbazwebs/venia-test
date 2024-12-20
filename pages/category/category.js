@@ -7,6 +7,7 @@ const productCount = document.getElementById('productCount');
 
 let products = [];
 let uniqueCategories = [];
+let uniqueCategoriesForMobile = [];
 let currentPage = 1;
 const itemsPerPage = 5;
 
@@ -40,6 +41,18 @@ function getProducts() {
                 window.location.href = `/pages/product-details/product-details.html?id=${productId}`;
             }
         });
+        uniqueCategoriesForMobile = [...new Set(products.map(product => product.category))];
+        console.log(uniqueCategoriesForMobile);
+        renderProducts(products);
+        console.log("[products length]  ==>", products.length);
+        productList.addEventListener('click', (e) => {
+            console.log('e.target ===> ', e.target);
+            const productCard = e.target.closest('.product-card');
+            if (productCard) {
+                const productId = productCard.dataset.id;
+                window.location.href = `/pages/product-details/product-details.html?id=${productId}`;
+            }
+        });
         
         uniqueCategories.forEach(category => {
             const checkbox = document.createElement('input');
@@ -60,6 +73,25 @@ function getProducts() {
             
             categoryFilters.appendChild(container);
             // categoryFiltersMobile.appendChild(container);
+        });
+        uniqueCategoriesForMobile.forEach(category => {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = category;
+            checkbox.id = category;
+            // checkbox.checked = true;
+            checkbox.addEventListener('change', updateProductList);
+            // checkbox.addEventListener('change', updateProductListInMobile);
+            
+            const label = document.createElement('label');
+            label.htmlFor = category;
+            label.textContent = category;
+            
+            const container = document.createElement('li');
+            container.appendChild(checkbox);
+            container.appendChild(label);
+            
+            categoryFiltersMobile.appendChild(container);
         });
     });
 }

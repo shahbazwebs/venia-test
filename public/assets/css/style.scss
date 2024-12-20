@@ -1031,6 +1031,9 @@ footer{
             @media(max-width: 991px){
                justify-content: center;
                margin-bottom: 30px;
+               @media(max-width: 767px){
+                flex-direction: column-reverse;
+               }
             }
             p{
                 color: $fontColor;
@@ -1043,9 +1046,6 @@ footer{
                 padding: 10px;
                 border-radius: 8px;
                 transition: $transition;
-                @media(max-width: 991px){
-                    display: none;
-                }
                 &:focus{
                     box-shadow: none;
                     outline: none;

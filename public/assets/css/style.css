@@ -1141,6 +1141,11 @@ footer ul.socialMedia li a:hover svg line {
     margin-bottom: 30px;
   }
 }
+@media (max-width: 991px) and (max-width: 767px) {
+  .listOfProduct .listOfProductItems .prodcutSearchSection {
+    flex-direction: column-reverse;
+  }
+}
 .listOfProduct .listOfProductItems .prodcutSearchSection p {
   color: #172026;
   font-size: 16px;
@@ -1152,11 +1157,6 @@ footer ul.socialMedia li a:hover svg line {
   padding: 10px;
   border-radius: 8px;
   transition: all 0.5s ease;
-}
-@media (max-width: 991px) {
-  .listOfProduct .listOfProductItems .prodcutSearchSection select {
-    display: none;
-  }
 }
 .listOfProduct .listOfProductItems .prodcutSearchSection select:focus {
   box-shadow: none;
